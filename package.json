@@ -1,0 +1,51 @@
+{
+  "name": "v1-charity-web",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.4",
+    "core-js": "^3.17.3",
+    "node-sass": "^6.0.1",
+    "prettier-eslint": "^13.0.0",
+    "react": "^17.0.2",
+    "react-app-polyfill": "^2.0.0",
+    "react-device-detect": "^1.17.0",
+    "react-dom": "^17.0.2",
+    "react-qr-code": "^2.0.2",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "4.0.3",
+    "recoil": "^0.4.1",
+    "regenerator-runtime": "^0.13.9",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "deploy": "npm run build && aws s3 sync ./build s3://dev.kmonsterz.io --acl public-read && aws cloudfront create-invalidation --distribution-id E3SUQ6AWZNW4Y3 --paths \"/index.html\" \"/static/js/*\""
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "prettier": "2.4.0"
+  }
+}
