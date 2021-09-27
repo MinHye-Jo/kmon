@@ -34,10 +34,7 @@ function DetailModal({ data, open, onClose, onAction }) {
       <div className="popup1" style={{ display: open ? "block" : "none" }}>
         <button className="popupClose" onClick={() => onClose()}></button>
         <div className="popupLeft">
-          <div
-            className={collectionData.closed ? "closed" : "soldOut"}
-            style={{ display: soldOut || collectionData.closed ? "block" : "none" }}
-          >
+          <div className={collectionData.closed ? "closed" : "soldOut"} style={{ display: "block" }}>
             <div>
               Sold
               <br />
@@ -46,49 +43,36 @@ function DetailModal({ data, open, onClose, onAction }) {
           </div>
           <div></div>
           <div className="popupImg">
-            <img
-              src={collectionData.imgUrl.replace("/static/", "/")}
-              alt={collectionData.nftNameKor}
-              name={collectionData.nftNameKor}
-            />
+            <img src={"img/gumi(R).png"} alt="copy url" />
           </div>
         </div>
         <div className="popupRight">
-          <div className="popupTitle">{collectionData.nftNameKor}</div>
+          <div className="popupTitle">{collectionData.nftNameKorZ || "GUMI (Rare)"}</div>
           <div className="popupText">
             <div className="row">
               <div className="popupSubtitle">Age</div>
-              <span>{collectionData.age}</span>
+              <span>{collectionData.age || "7(400)Years"}</span>
             </div>
             <div className="row">
               <div className="popupSubtitle">Story</div>
             </div>
             <div className="row">
-              <span dangerouslySetInnerHTML={{ __html: collectionData.description }}></span>
+              <span>
+                She is a nine-tailed fox who can only become a human when he meets someone who truly loves him.
+                <br />
+                Gumi, who has a lively personality, has only had unrequited love for 400 years.
+                <br />
+                Gumi, who has always had unrequited love because of her young appearance, becomes infinitely shy in
+                front of the person she likes. <br />
+                Can Gumi meet a human who loves her in Cardano?
+              </span>
             </div>
             <div className="row">
               <br />
             </div>
             <div className="row">
-              <div className="popupSubtitle">Price</div>
-              <span className="blue">{collectionData.nftPrice / 1000000 + " ADA"}</span>
-            </div>
-            <div className="row">
               <div className="popupSubtitle">Remain</div>
               <span className="blue">{collectionData.targetQuantity - collectionData.mintCount}</span>
-            </div>
-            <div className="buyNumber">
-              <div className="popupSubtitle">Quantity</div>
-              <div className="quantity">
-                <input readOnly type="number" min="1" max="9" step="1" value="1" />
-                <div className="quantity-nav">
-                  <div className="quantity-button quantity-up">+</div>
-                  <div className="quantity-button quantity-down">-</div>
-                </div>
-              </div>
-              <button className="btnBuy" disabled onClick={() => onAction(collectionData)}>
-                BUY
-              </button>
             </div>
           </div>
         </div>

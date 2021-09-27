@@ -21,11 +21,15 @@ function Header() {
           <a href="mailto:cardanocomm@gmail.com" target="_blank" className="gmail" rel="noreferrer"></a>
         </div>
         <div className="nav">
+          <Link to="/roadmap" className="roadmap">
+            <div className="navIcon"></div>
+            <div className="navText">Roadmap</div>
+          </Link>
           <Link to="/guide" className="guide">
             <div className="navIcon"></div>
             <div className="navText">Guide</div>
           </Link>
-          <div className="lang">
+          {/* <div className="lang">
             <div className="navIcon"></div>
             <div className="navText">
               <select
@@ -40,18 +44,22 @@ function Header() {
                 <option value="jp">日本語</option>
               </select>
             </div>
-          </div>
+          </div> */}
         </div>
         <div>
           <div className="hamburger" onClick={() => setSubOpen(true)}></div>
           <div className="submenu" style={{ display: subOpen ? "block" : "none" }}>
             <div className="close" onClick={() => setSubOpen(false)}></div>
             <div className="moNav">
+              <Link to="/roadmap" className="roadmap">
+                <div className="navIcon"></div>
+                <div className="navText">Roadmap</div>
+              </Link>
               <Link to="/guide" className="guide">
                 <div className="navIcon"></div>
                 <div className="navText">Guide</div>
               </Link>
-              <div className="lang">
+              {/* <div className="lang">
                 <div className="navIcon"></div>
                 <div className="navText">
                   <select
@@ -66,7 +74,7 @@ function Header() {
                     <option value="jp">日本語</option>
                   </select>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="moSns">
               <a href="https://twitter.com/KmonsterCNFT" target="_blank" className="twitter" rel="noreferrer"></a>

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap");
 .main {
   .contentsWrap {
     width: 100%;
@@ -62,39 +63,44 @@
   }
   .mainTitle2 {
     width: 100%;
-    font-size: 100px;
-    text-align: center;
-    color: #ff2333;
-    font-family: "Luckiest Guy", cursive;
-    font-weight: 800;
     position: absolute;
     display: none;
     z-index: 3;
-    top: 50px;
+    text-align: center;
+    top: 0px;
+  }
+  .mainTitle2 b {
+    color: #ff2333;
+    font-size: 120px;
+    font-family: "Alfa Slab One", cursive;
+    font-weight: 800;
     text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
     -webkit-text-stroke: 1px #fff;
+    line-height: 100px;
   }
   .countDown {
     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    font-size: 60px;
+    font-size: 50px;
+    line-height: 50px;
     -webkit-text-stroke: 1px #fff;
-    color: #3129cc;
+    color: #fff;
   }
-  .mainTitle > span {
+  .countDate {
     font-size: 30px;
-    line-height: 40px;
+    line-height: 50px;
+    font-weight: 800;
     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     -webkit-text-stroke: 0px #fff;
     color: #fff;
     font-family: "NanumSquareRound";
   }
-  .mainTitle2 > span {
-    font-size: 30px;
-    line-height: 40px;
-    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    -webkit-text-stroke: 0px #fff;
-    color: #fff;
-    font-family: "NanumSquareRound";
+  .mainSubtitle {
+    color: #ff8413;
+    font-size: 50px;
+    font-family: "Alfa Slab One", cursive;
+    font-weight: 800;
+    -webkit-text-stroke: 1px #fff;
+    text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
   }
   .character {
     width: 1280px;
@@ -152,11 +158,11 @@
   }
 
   .collection {
-    width: 224px;
+    width: 240px;
     display: inline-block;
     vertical-align: top;
-    margin-top: 50px;
-    margin-right: 40px;
+    margin-top: 30px;
+    margin-right: 20px;
     cursor: pointer;
   }
 
@@ -165,7 +171,7 @@
   }
 
   .collectionImg {
-    width: 224px;
+    width: 100%;
     height: 298px;
     overflow: hidden;
     -webkit-transition: all 0.2s ease-in-out;
@@ -214,7 +220,7 @@
     position: fixed;
     left: 0;
     top: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 400;
   }
 
@@ -235,7 +241,7 @@
   }
 
   .popupClose {
-    position: absolute;
+    position: fixed;
     width: 20px;
     height: 20px;
     top: 10px;
@@ -293,7 +299,6 @@
 
   .popupImg > img {
     width: 100%;
-    height: 100%;
   }
 
   .popup1 .popupTitle {
@@ -305,10 +310,20 @@
     font-family: "NanumSquareRound";
     display: inline-block;
   }
+  .popup3 .popupTitle {
+    width: 120px;
+    font-size: 26px;
+    line-height: 45px;
+    font-weight: 800;
+    text-align: left;
+    font-family: "NanumSquareRound";
+    display: inline-block;
+  }
 
-  .popup1 .popupText {
+  .popup1 .popupText,
+  .popup3 .popupText {
     font-size: 17px;
-    line-height: 27px;
+    line-height: 34px;
     font-weight: 500;
     text-align: left;
     margin-top: 20px;
@@ -328,6 +343,17 @@
     display: inline-block;
     vertical-align: top;
   }
+  .popup3 .popupSubtitle {
+    width: 120px;
+    font-weight: 800;
+    font-size: 17px;
+    line-height: 34px;
+    text-align: left;
+    font-family: "NanumSquareRound";
+    color: #111;
+    display: inline-block;
+    vertical-align: top;
+  }
 
   .blue {
     font-size: 24px;
@@ -335,37 +361,86 @@
     font-weight: 800;
     vertical-align: top;
     line-height: 34px;
+    font-family: "NanumSquareRound";
   }
 
   .buyNumber {
     display: inline-block;
     width: 100%;
     position: relative;
-    border-top: solid 1px #ddd;
-    padding: 21px 0;
+    padding: 0 0 50px 0;
     margin-top: 20px;
+    border-bottom: solid 1px #ddd;
   }
 
   .btnBuy {
-    background: -webkit-gradient(linear, left top, left bottom, from(#4932dc), to(#1d1a84));
-    background: -o-linear-gradient(top, #4932dc, #1d1a84);
-    background: linear-gradient(to bottom, #4932dc, #1d1a84);
-    width: 150px;
-    height: 60px;
-    border-radius: 30px;
-    font-size: 17px;
-    line-height: 60px;
     font-weight: 800;
     font-family: "NanumSquareRound";
     color: #fff;
+  }
+  .mainImg .btnBuy {
+    width: 200px;
+    height: 60px;
+    border-radius: 30px;
+    line-height: 60px;
+    font-size: 26px;
+    background: -o-linear-gradient(top, #ff6700, #ff2333);
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff6700), to(#ff2333));
+    background: linear-gradient(to bottom, #ff6700, #ff2333);
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    bottom: 100px;
+    -webkit-box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+  .mainImg .btnBuy:hover {
+    -webkit-box-shadow: 0px 0px 30px rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 30px rgba(255, 255, 255, 1);
+  }
+  .popup1 .btnBuy {
+    width: 150px;
+    height: 60px;
+    border-radius: 30px;
+    line-height: 60px;
     position: absolute;
     right: 0;
     bottom: 20px;
+    font-size: 17px;
+    background: -o-linear-gradient(top, #4932dc, #1d1a84);
+    background: -webkit-gradient(linear, left top, left bottom, from(#4932dc), to(#1d1a84));
+    background: linear-gradient(to bottom, #4932dc, #1d1a84);
+  }
+  .popup3 .btnBuy {
+    width: 150px;
+    height: 60px;
+    border-radius: 30px;
+    line-height: 60px;
+    position: absolute;
+    right: 40px;
+    bottom: 44px;
+    font-size: 17px;
+    background: -o-linear-gradient(top, #4932dc, #1d1a84);
+    background: -webkit-gradient(linear, left top, left bottom, from(#4932dc), to(#1d1a84));
+    background: linear-gradient(to bottom, #4932dc, #1d1a84);
   }
 
   .quantity {
     position: relative;
-    margin-top: 5px;
+    padding: 0 10px;
+    height: 45px;
+    float: right;
+    font-size: 0;
+    border-radius: 25px;
+    background: #fff;
+    -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
   }
 
   input[type="number"]::-webkit-inner-spin-button,
@@ -379,17 +454,16 @@
   }
 
   .quantity input {
-    width: 65px;
-    height: 42px;
-    line-height: 1.65;
-    float: left;
-    display: block;
+    width: 60px;
+    height: 100%;
+    line-height: 45px;
+    display: inline-block;
     padding: 0;
     margin: 0;
-    padding-left: 20px;
-    border: 1px solid #ddd;
-    font-size: 20px;
+    border: 1px solid #fff;
+    font-size: 24px;
     font-weight: 800;
+    text-align: center;
   }
 
   .quantity input:focus {
@@ -397,24 +471,21 @@
   }
 
   .quantity-nav {
-    float: left;
+    display: inline-block;
     position: relative;
-    height: 42px;
+    height: 100%;
+    height: 100%;
   }
 
   .quantity-button {
     position: relative;
     cursor: pointer;
-    border-left: 1px solid #ddd;
-    width: 20px;
+    width: 45px;
     text-align: center;
-    color: #ddd;
+    color: #666;
     font-size: 13px;
     font-family: "Trebuchet MS", Helvetica, sans-serif !important;
-    line-height: 1.7;
-    -webkit-transform: translateX(-100%);
-    -ms-transform: translateX(-100%);
-    transform: translateX(-100%);
+    line-height: 45px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -423,25 +494,23 @@
   }
 
   .quantity-button.quantity-up {
-    position: absolute;
-    height: 50%;
-    top: 0;
-    border-bottom: 1px solid #ddd;
-    font-size: 17px;
-    font-weight: 800;
-    line-height: 20px;
+    display: inline-block;
+    height: 45px;
+    width: 45px;
+    background: url("../img/plus.svg") center no-repeat;
+    background-size: 50px;
   }
 
   .quantity-button.quantity-down {
-    position: absolute;
-    bottom: -1px;
-    height: 50%;
-    font-size: 17px;
-    font-weight: 800;
-    line-height: 20px;
+    height: 45px;
+    width: 45px;
+    display: inline-block;
+    background: url("../img/minus.svg") center no-repeat;
+    background-size: 50px;
   }
 
   .popup2 {
+    text-align: center;
     display: none;
     width: 650px;
     padding: 40px;
@@ -452,7 +521,22 @@
     z-index: 401;
     left: 50%;
     top: 50%;
-    text-align: center;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  .popup3 {
+    text-align: left;
+    display: none;
+    width: 500px;
+    padding: 40px;
+    background: #fff;
+    border-radius: 15px;
+    position: fixed;
+    font-size: 0;
+    z-index: 401;
+    left: 50%;
+    top: 50%;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -468,7 +552,6 @@
     color: #111;
     display: block;
     margin-top: 20px;
-    vertical-align: top;
   }
 
   .popup2 .popupTitle {
@@ -480,7 +563,6 @@
     font-family: "NanumSquareRound";
     display: block;
   }
-
   .popup2 .popupText {
     font-size: 17px;
     line-height: 27px;
@@ -521,7 +603,7 @@
     outline: none;
   }
   .popupBox > input {
-    width: 100%;
+    width: 50px;
     height: 100%;
     border: none;
     font-size: 15px;
@@ -529,6 +611,7 @@
     text-align: center;
     font-family: "NanumSquareRound";
     color: #111;
+    display: inline-block;
   }
   .btnCopy {
     width: 20px;
@@ -553,20 +636,23 @@
 
   .row {
     width: 100%;
+    line-height: 34px;
+    text-align: left;
   }
 
   @media all and (max-width: 1319px) {
     .mainTitle {
       top: 0;
-    }
-    .mainTitle {
       font-size: 70px;
     }
-    .mainTitle2 {
-      top: 0;
-    }
-    .mainTitle2 {
+    .mainTitle2 b {
       font-size: 70px;
+    }
+    .mainSubtitle {
+      font-size: 40px;
+    }
+    .mainImg .btnBuy {
+      bottom: 80px;
     }
     .mainImg {
       height: 100vh;
@@ -580,17 +666,15 @@
     .characterWrap {
       bottom: 100px;
     }
-
     .collection:nth-child(5n) {
-      margin-right: 40px;
+      margin-right: 20px;
     }
-
     .collection:nth-child(4n) {
       margin-right: 0px;
     }
 
     .contents {
-      width: 1056px;
+      width: 1060px;
       margin: 0 auto;
     }
 
@@ -624,40 +708,25 @@
       height: auto;
     }
 
-    .popup2 {
+    .popup2,
+    .popup3 {
       padding: 30px;
     }
   }
-
-  @media all and (max-width: 1055px) {
+  @media all and (max-width: 1059px) {
+    .contents {
+      width: 820px;
+      margin: 0 auto;
+    }
+    .collection:nth-child(4n) {
+      margin-right: 20px;
+    }
     .collection:nth-child(3n) {
       margin-right: 0px;
-    }
-
-    .collection:nth-child(4n) {
-      margin-right: 40px;
-    }
-
-    .contents {
-      width: 792px;
-      margin: 0 auto;
     }
   }
 
-  @media all and (max-width: 791px) {
-    .collection:nth-child(3n) {
-      margin-right: 40px;
-    }
-
-    .collection:nth-child(2n) {
-      margin-right: 0px;
-    }
-
-    .contents {
-      width: 528px;
-      margin: 0 auto;
-    }
-
+  @media all and (max-width: 819px) {
     .popup1 {
       width: 360px;
     }
@@ -679,54 +748,45 @@
     }
 
     .mainImg {
-      height: 90vh;
+      height: 95vh;
+    }
+    .contents {
+      width: 530px;
+      margin: 0 auto;
+    }
+    .collection {
+      width: 150px;
+      margin-top: 30px;
+    }
+    .collectionImg {
+      height: 200px;
+      width: 100%;
     }
   }
 
-  @media all and (max-width: 527px) {
-    .contents {
-      width: 360px;
-      margin: 0 auto;
-    }
-
-    .collection {
-      width: 150px;
-      margin-right: 0;
-      margin-top: 30px;
-    }
+  @media all and (max-width: 667px) {
     .mainTitle {
       font-size: 50px;
       text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     }
 
-    .mainTitle > span {
-      font-size: 20px;
-      line-height: 35px;
+    .countDown {
+      font-size: 24px;
+      line-height: 30px;
     }
-    .mainTitle2 {
+    .mainTitle2 b {
       font-size: 50px;
+      line-height: 50px;
       text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     }
+    .mainSubtitle {
+      font-size: 24px;
+      line-height: 30px;
+    }
 
-    .mainTitle2 > span {
+    .countDate {
       font-size: 20px;
-      line-height: 35px;
-    }
-    .collection:nth-child(2n) {
-      margin-left: 20px;
-    }
-
-    .collection:nth-child(3n) {
-      margin-right: 0;
-    }
-
-    .collection:nth-child(5n) {
-      margin-right: 0;
-    }
-
-    .collectionImg {
-      height: 200px;
-      width: 100%;
+      line-height: 30px;
     }
 
     .popup1 {
@@ -741,10 +801,50 @@
     .popup1 .popupText {
       font-size: 15px;
     }
+    .popup3 {
+      width: auto;
+      min-width: 252px;
+      max-height: 90vh;
+      overflow: scroll;
+    }
+    .popup3 .popupText {
+      width: 100%;
+      font-size: 15px;
+      text-align: center;
+    }
+    .popup3 .popupTitle {
+      width: 100%;
+      text-align: center;
+    }
+    .popup3 .btnBuy {
+      position: inherit;
+      margin-top: 20px;
+    }
+    .popup3 .quantity {
+      float: left;
+      position: relative;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+      margin-top: 10px;
+    }
 
     .popup1 .popupSubtitle {
       font-size: 15px;
       width: 70px;
+      line-height: 24px;
+    }
+    .popup3 .popupSubtitle {
+      font-size: 15px;
+      line-height: 24px;
+      width: 100px;
+    }
+    .popup1 .row {
+      line-height: 24px;
+    }
+    .blue {
+      line-height: 24px;
     }
 
     .popup2 .popupText {
@@ -773,16 +873,44 @@
       height: 400px;
     }
 
-    .btnBuy {
+    .popupWrap .btnBuy {
       width: 100px;
       height: 45px;
       line-height: 45px;
     }
+    .mainImg .btnBuy {
+      bottom: 20px;
+    }
+  }
+  @media all and (max-width: 529px) {
+    .contents {
+      width: 360px;
+      margin: 0 auto;
+    }
+    .collection:nth-child(3n) {
+      margin-right: 20px;
+    }
+    .collection:nth-child(2n) {
+      margin-right: 0;
+    }
+    .mainImg .btnBuy {
+      width: 150px;
+      height: 50px;
+      border-radius: 30px;
+      line-height: 50px;
+      font-size: 18px;
+    }
   }
 
-  @media all and (max-width: 374px) {
+  @media all and (max-width: 359px) {
     .collectionImg {
       height: 146px;
+    }
+    .collection:nth-child(1n) {
+      margin-right: 20px;
+    }
+    .collection:nth-child(2n) {
+      margin-right: 0px;
     }
 
     .popup1 {
@@ -809,6 +937,24 @@
     .contents {
       width: 270px;
       margin: 0 auto;
+    }
+    .countDown {
+      font-size: 18px;
+      line-height: 20px;
+    }
+    .mainTitle2 b {
+      font-size: 30px;
+      line-height: 30px;
+      text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+    .mainSubtitle {
+      font-size: 18px;
+      line-height: 20px;
+    }
+
+    .countDate {
+      font-size: 14px;
+      line-height: 20px;
     }
   }
 }

@@ -4,6 +4,7 @@ import "../styles/css/main.scss";
 import { ntfList, ntfData } from "../services/collection";
 import DetailModal from "../screens/components/DetailModal";
 import QrModal from "../screens/components/QrModal";
+import QuantityModal from "../screens/components/QuantityModal";
 
 import transData from "../config/tranLang";
 import { languageState } from "../store/app";
@@ -11,7 +12,7 @@ import { useRecoilValue } from "recoil";
 
 function Main() {
   // 카운트 제어
-  const dday = new Date("Sep 11,2021,21:00:00"); //디데이
+  const dday = new Date("Nov 11,2021,21:00:00"); //디데이
   const now = new Date(); //현재 날짜 가져오기
   const distance = dday.getTime() - now;
   const [d, setD] = useState(0);
@@ -34,6 +35,10 @@ function Main() {
   // 팝업2 제어
   const [popup2Open, setPopup2Open] = useState(false);
   const [popup2Data, setPopup2Data] = useState(null);
+
+  // 팝업3 제어
+  const [popup3Open, setPopup3Open] = useState(false);
+  const [popup3Data, setPopup3Data] = useState(null);
 
   // 코인 리스트 조회
   useEffect(() => {
@@ -72,7 +77,7 @@ function Main() {
 
   // QR 모달 오픈
   const openQrModal = (data) => {
-    setPopup1Open(false);
+    setPopup3Open(false);
     setPopup2Open(true);
     setPopup2Data(data);
   };
@@ -85,19 +90,24 @@ function Main() {
             <div className="mainTitle" style={{ display: !closed ? "block" : "none" }}>
               COMING SOON
               <br />
-              <span>September 6th 12PM (UTC)</span>
-              <p className="countDown">{`${d}Days ${h}:${m}:${s}`}</p>
+              <span className="countDate">September 6th 12PM (UTC)</span>
             </div>
             <div className="mainTitle2" style={{ display: closed ? "block" : "none" }}>
-              Series1 closed.
+              <b>Series2</b>
               <br />
-              <span>
-                kmonsterz will return with series 2.
+              <span className="mainSubtitle">
+                Teenage and Special NFT
                 <br />
-                Thank you for your support.
               </span>
+              <div>
+                <span className="countDate">September 6th 12PM (UTC)</span>
+                <p className="countDown">{`${d}Days ${h}:${m}:${s}`}</p>
+              </div>
             </div>
             <div className="character"></div>
+            <button className="btnBuy" onClick={() => setPopup3Open(true)}>
+              BUY NOW!
+            </button>
           </div>
           <div className="mainBottom"></div>
         </div>
@@ -105,9 +115,58 @@ function Main() {
           <div className="contentsTitle">{transData[language].title}</div>
           <div className="contentsText" dangerouslySetInnerHTML={{ __html: transData[language].desc }}></div>
           <div className="blackArea"></div>
-          <div className="contentsTitle">Collection</div>
+          <div className="contentsTitle">Series 2</div>
           <div className="contentsBox">
-            {collectionList && collectionList.length
+            <div className="collection" onClick={() => setPopup1Open(true)}>
+              <div className="collectionImg">
+                <div className="soldOut" style={{ display: "block" }}></div>
+                <div className="imgArea">
+                  <img src={"img/gumi(R).png"} alt="copy url" />
+                </div>
+              </div>
+              <div className="collectionText">gumi</div>
+            </div>
+            <div className="collection">
+              <div className="collectionImg">
+                <div className="soldOut"></div>
+                <div className="imgArea">
+                  <img src={"img/gumi(R).png"} alt="copy url" />
+                </div>
+              </div>
+              <div className="collectionText">gumi</div>
+            </div>
+            <div className="collection">
+              <div className="collectionImg">
+                <div className="soldOut"></div>
+                <div className="imgArea">
+                  <img src={"img/gumi(R).png"} alt="copy url" />
+                </div>
+              </div>
+              <div className="collectionText">gumi</div>
+            </div>
+            <div className="collection">
+              <div className="collectionImg">
+                <div className="soldOut"></div>
+                <div className="imgArea">
+                  <img src={"img/gumi(R).png"} alt="copy url" />
+                </div>
+              </div>
+              <div className="collectionText">gumi</div>
+            </div>
+            <div className="collection">
+              <div className="collectionImg">
+                <div className="soldOut"></div>
+                <div className="imgArea">
+                  <img src={"img/gumi(R).png"} alt="copy url" />
+                </div>
+              </div>
+              <div className="collectionText">gumi</div>
+            </div>
+          </div>
+          <div className="blackArea"></div>
+          <div className="contentsTitle">Series 1</div>
+          <div className="contentsBox">
+            {/* {collectionList && collectionList.length
               ? collectionList.map((o, idx) => {
                   return (
                     <div className="collection" key={idx} onClick={() => collectClick(o.nftId)}>
@@ -119,25 +178,19 @@ function Main() {
                         <div className="imgArea">
                           <img src={o.imgUrl.replace("/static", "")} alt={o.nftName} name={o.nftName} />
                         </div>
-                        <div className="collectionText"> {o.nftNameKor} </div>
                       </div>
+                      <div className="collectionText"> {o.nftNameKor} </div>
                     </div>
                   );
                 })
-              : null}
-            {collectionList && collectionList.length < 10
-              ? [...new Array(10 - collectionList.length)].map((o, idx) => {
-                  return (
-                    <div className="collection" key={idx}>
-                      <div className="collectionImg">
-                        <div className="imgArea"></div>
-                      </div>
-                      <div className="collectionText">???</div>
-                    </div>
-                  );
-                })
-              : null}
+              : null} */}
           </div>
+          <QuantityModal
+            data={popup3Data}
+            open={popup3Open}
+            onClose={() => setPopup3Open(false)}
+            onAction={() => openQrModal()}
+          />
           <DetailModal
             data={popup1Data}
             open={popup1Open}
