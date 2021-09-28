@@ -10,22 +10,68 @@ import transData from "../config/tranLang";
 import { languageState } from "../store/app";
 import { useRecoilValue } from "recoil";
 
+const monthName = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+
 function Main() {
   // 카운트 제어
-  const dday = new Date("Nov 11,2021,21:00:00"); //디데이
+  // const dday = new Date("Nov 11,2021,21:00:00 UTC"); //디데이 UTC
+  const dday = new Date(Date.UTC(2021, 10, 11, 21, 0, 0));
+
+  // console.log(dday);
   const now = new Date(); //현재 날짜 가져오기
-  const distance = dday.getTime() - now;
-  const [d, setD] = useState(0);
-  const [h, setH] = useState(0);
-  const [m, setM] = useState(0);
-  const [s, setS] = useState(0);
+
+
+  const [distanceTime, setDistanceTime] = useState();
 
   // 번역 제어
   const language = useRecoilValue(languageState);
 
+  const distance = dday.getTime() - Date.now(); // UTC 기준 남은 시간.
+  let date = (Math.floor(distance / (1000 * 60 * 60 * 24)));
+  let hour = (Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+  let minutes = (Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+  let second = (Math.floor((distance % (1000 * 60)) / 1000));
+  // setDistanceTime();
+  if (hour < 10) {
+    hour = "0" + hour;
+  }
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+  if (second < 10) {
+    second = "0" + second;
+  }
+  let initDistanceTime = `${date}Days ${hour}:${minutes}:${second}`;
+  // setDistanceTime(`뿌우`);
+
+  const counter = () => {
+    setInterval(function () {
+      const distance = dday.getTime() - Date.now(); // UTC 기준 남은 시간.
+      let date = (Math.floor(distance / (1000 * 60 * 60 * 24)));
+      let hour = (Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+      let minutes = (Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+      let second = (Math.floor((distance % (1000 * 60)) / 1000));
+      // setDistanceTime();
+      if (hour < 10) {
+        hour = "0" + hour;
+      }
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      if (second < 10) {
+        second = "0" + second;
+      }
+      setDistanceTime(`${date}Days ${hour}:${minutes}:${second}`);
+
+    }, 1000);
+  };
+
   // 데이터 제어
   const [collectionList, setCollectionList] = useState(null);
-  const closed = dday.getMonth() !== now.getMonth() || dday.getDate() < now.getDate() ? true : false;
+  const closed = dday.getMonth() !== now.getUTCMonth() || dday.getDate() < now.getUTCDate() ? true : false;
   // const [soldOut, setSoldOut] =  useState(false);
 
   // 팝업1 제어
@@ -40,34 +86,22 @@ function Main() {
   const [popup3Open, setPopup3Open] = useState(false);
   const [popup3Data, setPopup3Data] = useState(null);
 
+  counter();
   // 코인 리스트 조회
   useEffect(() => {
     (async () => {
       // counter();
-
       const { data } = await ntfList();
       if (data && data.return_code === 200) setCollectionList(data.response);
     })();
+
   }, []);
 
-  // 메인 카운트다운
-  // eslint-disable-next-line no-unused-vars
-  const counter = () => {
-    setInterval(function () {
-      setD(Math.floor(distance / (1000 * 60 * 60 * 24)));
-      setH(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-      setM(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
-      setS(Math.floor((distance % (1000 * 60)) / 1000));
-      if (s < 10) {
-        setS("0" + s);
-      }
-    }, 1000);
-  };
+
 
   // 코인 세부 정보 조회
   const collectClick = async (nftId) => {
     const { data } = await ntfData(nftId);
-
     if (data && data.return_code === 200) {
       const detilData = { ...data.response, closed: closed };
       setPopup1Data(detilData);
@@ -90,7 +124,7 @@ function Main() {
             <div className="mainTitle" style={{ display: !closed ? "block" : "none" }}>
               COMING SOON
               <br />
-              <span className="countDate">September 6th 12PM (UTC)</span>
+              <span className="countDate">{monthName[dday.getUTCMonth()]} {dday.getUTCDate()}th {dday.getUTCHours() + (dday.getUTCHours() > 12 ? "PM" : "AM")} (UTC)</span>
             </div>
             <div className="mainTitle2" style={{ display: closed ? "block" : "none" }}>
               <b>Series2</b>
@@ -100,8 +134,8 @@ function Main() {
                 <br />
               </span>
               <div>
-                <span className="countDate">September 6th 12PM (UTC)</span>
-                <p className="countDown">{`${d}Days ${h}:${m}:${s}`}</p>
+                <span className="countDate">{monthName[dday.getUTCMonth()]} {dday.getUTCDate()}th {dday.getUTCHours() + (dday.getUTCHours() > 12 ? "PM" : "AM")} (UTC)</span>
+                <p className="countDown">{distanceTime === undefined ? initDistanceTime : distanceTime}</p>
               </div>
             </div>
             <div className="character"></div>
