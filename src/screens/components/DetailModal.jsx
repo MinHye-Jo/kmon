@@ -13,16 +13,40 @@ function DetailModal({ data, open, onClose, onAction }) {
     closed: false,
   });
   const [soldOut, setSoldOut] = useState(false);
+  const [remain, setRemain] = useState(0);
+  const [intervalStop, setIntervalStop] = useState(false)
+
+
+
+  let getRemain = null;
 
   useEffect(() => {
+
+    // if (open) {
+    //   // 바로 api 실행. 
+
+
+    //   getRemain = setInterval(function () {
+    //     if (open) {
+    //       setRemain(333)
+    //     }
+    //   }, 10000);
+    // }
+
     if (data) {
       setCollectionData({ ...data });
-
+      setRemain(data.remain);
       // soldOut 제어
-      if (data.targetQuantity - data.mintCount <= 0) {
-        setSoldOut(true);
-      } else setSoldOut(false);
+      if (data.closed !== null && !data.closed) {
+        if (data.targetQuantity - data.mintCount <= 0) {
+          setSoldOut(true);
+        } else setSoldOut(false);
+      }
 
+      return () => clearInterval(getRemain);
+      // 10초에 한번씩 remain 수치 불러오기.
+      // remainTiktok();
+      // setRemain(9999)
       /* clearInterval(intervalVal);
         intervalVal = setInterval(checkSoldOut, 10000);
         return false; */
@@ -32,39 +56,38 @@ function DetailModal({ data, open, onClose, onAction }) {
   return (
     <div className="popupWrap" style={{ display: open ? "block" : "none" }}>
       <div className="popup1" style={{ display: open ? "block" : "none" }}>
-        <button className="popupClose" onClick={() => onClose()}></button>
+        <button className="popupClose" onClick={() => {
+          onClose()
+        }}></button>
         <div className="popupLeft">
-          <div className={collectionData.closed ? "closed" : "soldOut"} style={{ display: "block" }}>
-            <div>
-              Sold
-              <br />
-              Out
+          {
+            collectionData.closed === true &&
+            <div className={"closed"} style={{ display: "block" }}>
             </div>
-          </div>
+          }
+          {
+            soldOut === true &&
+            <div className={"soldOut"} style={{ display: "block" }}>
+            </div>
+          }
           <div></div>
           <div className="popupImg">
-            <img src={"img/gumi(R).png"} alt="copy url" />
+            <img src={collectionData.imgUrl} alt="copy url" />
           </div>
         </div>
         <div className="popupRight">
-          <div className="popupTitle">{collectionData.nftNameKorZ || "GUMI (Rare)"}</div>
+          <div className="popupTitle">{collectionData.name}</div>
           <div className="popupText">
             <div className="row">
               <div className="popupSubtitle">Age</div>
-              <span>{collectionData.age || "7(400)Years"}</span>
+              <span>{collectionData.age}</span>
             </div>
             <div className="row">
               <div className="popupSubtitle">Story</div>
             </div>
             <div className="row">
               <span>
-                She is a nine-tailed fox who can only become a human when he meets someone who truly loves him.
-                <br />
-                Gumi, who has a lively personality, has only had unrequited love for 400 years.
-                <br />
-                Gumi, who has always had unrequited love because of her young appearance, becomes infinitely shy in
-                front of the person she likes. <br />
-                Can Gumi meet a human who loves her in Cardano?
+                {collectionData.description}
               </span>
             </div>
             <div className="row">
@@ -72,7 +95,7 @@ function DetailModal({ data, open, onClose, onAction }) {
             </div>
             <div className="row">
               <div className="popupSubtitle">Remain</div>
-              <span className="blue">{collectionData.targetQuantity - collectionData.mintCount}</span>
+              <span className="blue">{remain}</span>
             </div>
           </div>
         </div>

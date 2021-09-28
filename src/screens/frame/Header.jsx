@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../../styles/css/style.css";
-import { languageState } from "../../store/app";
-import { useRecoilState } from "recoil";
+
 
 function Header() {
   // 서브메뉴 제어
   const [subOpen, setSubOpen] = useState(false);
 
-  const [language, setLanguage] = useRecoilState(languageState);
+  // const [language, setLanguage] = useRecoilState(languageState);
 
   return (
     <header className="headerWrap">

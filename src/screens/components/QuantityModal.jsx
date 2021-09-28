@@ -13,6 +13,7 @@ function QuantityModal({ data, open, onClose, onAction }) {
     closed: false,
   });
   const [soldOut, setSoldOut] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     if (data) {
@@ -32,27 +33,45 @@ function QuantityModal({ data, open, onClose, onAction }) {
   return (
     <div className="popupWrap" style={{ display: open ? "block" : "none" }}>
       <div className="popup3" style={{ display: open ? "block" : "none" }}>
-        <button className="popupClose" onClick={() => onClose()}></button>
+        <button className="popupClose" onClick={() => {
+          setQuantity(1)
+          onClose()
+        }}></button>
         <div className="buyNumber">
           <div className="popupTitle">Quantity</div>
           <div className="quantity">
-            <div className="quantity-button quantity-down"></div>
-            <input readOnly type="number" min="1" max="9" step="1" value="1" />
-            <div className="quantity-button quantity-up"></div>
+            <button className="quantity-button quantity-down"
+              onClick={() => {
+                if (quantity > 1) {
+                  setQuantity(quantity - 1)
+                }
+              }}
+            />
+            <input readOnly type="number" min="1" max="10" step="1" value={quantity} />
+            <button className="quantity-button quantity-up" onClick={() => {
+              if (quantity < 10) {
+                setQuantity(quantity + 1)
+              }
+
+            }} />
             <div className="quantity-nav"></div>
           </div>
         </div>
         <div className="popupText">
           <div className="row">
             <div className="popupSubtitle">Quantity</div>
-            <span className="blue">1</span>
+            <span className="blue">{quantity}</span>
           </div>
 
           <div className="row">
             <div className="popupSubtitle">Price</div>
-            <span className="blue">15ADA</span>
+            <span className="blue">{15 * quantity}ADA</span>
           </div>
-          <button className="btnBuy" onClick={() => onAction(collectionData)}>
+          <button className="btnBuy" onClick={() => {
+            data.quantity = quantity;
+            setQuantity(1); // 일단 초기화.
+            onAction(collectionData)
+          }}>
             BUY
           </button>
         </div>
