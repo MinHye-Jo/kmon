@@ -77,7 +77,10 @@ function QuantityModal({ data, open, onClose, onAction }) {
         </div>
       </div>
 
-      <div className="popupBg"></div>
+      <div className="popupBg" onClick={() => {
+        setQuantity(1)
+        onClose()
+      }}></div>
     </div>
   );
 }

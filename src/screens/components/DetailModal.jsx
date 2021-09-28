@@ -101,7 +101,9 @@ function DetailModal({ data, open, onClose, onAction }) {
         </div>
       </div>
 
-      <div className="popupBg"></div>
+      <div className="popupBg" onClick={() => {
+        onClose()
+      }}></div>
     </div>
   );
 }

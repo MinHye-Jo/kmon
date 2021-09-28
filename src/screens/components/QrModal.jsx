@@ -9,8 +9,6 @@ function QrModal({ data, quantityData, open, onClose }) {
   });
 
   useEffect(() => {
-    console.log(quantityData);
-    console.log(qrData);
     if (data) {
       setQrData({ ...data });
     }
@@ -72,7 +70,7 @@ function QrModal({ data, quantityData, open, onClose }) {
           </div>
         </div>
       </div>
-      <div className="popupBg"></div>
+      <div className="popupBg" onClick={() => onClose()}></div>
     </div>
   );
 }
