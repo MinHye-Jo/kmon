@@ -8,7 +8,7 @@ function Roadmap() {
         <div className="contents">
           <div className="blackArea"></div>
           <div className="blackArea"></div>
-          <div className="guideWrap">
+          <div className="guideWrap guideIllust">
             <div className="contentsTitle">Roadmap</div>
             <div className="contentsText">
               Our NFTs are designed to purchase NFTs that are finally sold only after continuing to purchase by series.
@@ -25,6 +25,7 @@ function Roadmap() {
               <br />
               Please remember our goals.
             </div>
+            <div className="blackArea"></div>
           </div>
         </div>
         <div className="blackArea"></div>
