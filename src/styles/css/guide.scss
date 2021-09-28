@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap");
 .guide {
   .contentsWrap {
     width: 100%;
@@ -16,12 +18,13 @@
   }
 
   .contentsTitle {
-    font-size: 26px;
-    line-height: 36px;
+    color: #574fe3;
+    font-size: 60px;
+    font-family: "Alfa Slab One", cursive;
     font-weight: 800;
-    text-align: center;
-    font-family: "NanumSquareRound";
-    color: #111;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    -webkit-text-stroke: 1px #fff;
+    line-height: 70px;
   }
 
   .blackArea {
@@ -62,10 +65,14 @@
     margin: 0 auto;
     background: #fff;
     border-radius: 30px;
-    padding: 40px;
+    padding: 60px 40px;
     -webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
+  }
+  .guideIllust {
+    background: url("../img/guideBg.png") #fff right repeat;
+    background-size: contain;
   }
   .guideBg {
     width: 100%;
@@ -130,7 +137,8 @@
       margin-top: 30px;
     }
     .contentsTitle {
-      font-size: 22px;
+      font-size: 34px;
+      line-height: 40px;
     }
   }
 }
