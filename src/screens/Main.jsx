@@ -88,6 +88,7 @@ function Main() {
             for (let key in seriesValue) {
               seriesValue[key].remain = returnValue[key]
             }
+
             setSeriesState(seriesValue);
             if (returnValue[5] === 0 && returnValue[6] === 0 && returnValue[7] === 0 && returnValue[8] === 0 && returnValue[9] === 0) {
               setOpen(false)
@@ -131,9 +132,9 @@ function Main() {
           for (let key in seriesValue) {
             seriesValue[key].remain = returnValue[key]
           }
+
           setSeriesState(seriesValue);
           if (returnValue[5] === 0 && returnValue[6] === 0 && returnValue[7] === 0 && returnValue[8] === 0 && returnValue[9] === 0) {
-            // console.log("으이!");
             setOpen(false)
           }
         }
