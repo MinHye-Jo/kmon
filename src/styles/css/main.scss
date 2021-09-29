@@ -599,6 +599,20 @@
     padding: 10px 10px 10px 10px;
     position: relative;
   }
+
+  .popupBoxAddress {
+    width: 100%;
+    border: solid 1px #ddd;
+    border-radius: 5px;
+    font-size: 15px;
+    line-height: 20px;
+    text-align: center;
+    font-family: "NanumSquareRound";
+    color: #111;
+    padding: 10px 10px 10px 10px;
+    position: relative;
+  }
+
   .popupBox > input:focus {
     outline: none;
   }
@@ -613,6 +627,19 @@
     color: #111;
     display: inline-block;
   }
+
+  .popupBoxAddress .address {
+    width: 90%;
+    height: 100%;
+    border: none;
+    font-size: 15px;
+    line-height: 20px;
+    text-align: center;
+    font-family: "NanumSquareRound";
+    color: #111;
+    display: inline-block;
+  }
+  
   .btnCopy {
     width: 20px;
     height: 20px;
@@ -762,6 +789,8 @@
       height: 200px;
       width: 100%;
     }
+
+
   }
 
   @media all and (max-width: 667px) {
@@ -881,6 +910,19 @@
     .mainImg .btnBuy {
       bottom: 20px;
     }
+
+    .popupBoxAddress {
+      width: 100%;
+      border: solid 1px #ddd;
+      border-radius: 5px;
+      font-size: 15px;
+      line-height: 20px;
+      text-align: left;
+      font-family: "NanumSquareRound";
+      color: #111;
+      padding: 10px 10px 10px 10px;
+      position: relative;
+    }
   }
   @media all and (max-width: 529px) {
     .contents {
@@ -899,6 +941,18 @@
       border-radius: 30px;
       line-height: 50px;
       font-size: 18px;
+    }
+    .popupBoxAddress {
+      width: 100%;
+      border: solid 1px #ddd;
+      border-radius: 5px;
+      font-size: 15px;
+      line-height: 20px;
+      text-align: left;
+      font-family: "NanumSquareRound";
+      color: #111;
+      padding: 10px 10px 10px 10px;
+      position: relative;
     }
   }
 
@@ -955,6 +1009,19 @@
     .countDate {
       font-size: 14px;
       line-height: 20px;
+    }
+
+    .popupBoxAddress {
+      width: 100%;
+      border: solid 1px #ddd;
+      border-radius: 5px;
+      font-size: 15px;
+      line-height: 20px;
+      text-align: left;
+      font-family: "NanumSquareRound";
+      color: #111;
+      padding: 10px 10px 10px 10px;
+      position: relative;
     }
   }
 }

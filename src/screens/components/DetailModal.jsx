@@ -66,7 +66,7 @@ function DetailModal({ data, open, onClose, onAction }) {
             </div>
           }
           {
-            soldOut === true &&
+            collectionData.remain === 0 &&
             <div className={"soldOut"} style={{ display: "block" }}>
             </div>
           }

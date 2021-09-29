@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/css/main.scss";
 
-import { ntfList, ntfData } from "../services/collection";
+import { ntfList, ntfData, getRemain } from "../services/collection";
 import DetailModal from "../screens/components/DetailModal";
 import QrModal from "../screens/components/QrModal";
 import QuantityModal from "../screens/components/QuantityModal";
@@ -11,6 +11,8 @@ import { languageState } from "../store/app";
 import { useRecoilValue } from "recoil";
 import series1Data from "../data/Series1";
 import series2Data from "../data/Series2";
+import seriesData from "../data/Series";
+import WalletList from "../data/Wallet";
 
 const monthName = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -25,6 +27,9 @@ function Main() {
 
   const [distanceTime, setDistanceTime] = useState();
   const [adaQuantity, setAdaQuantity] = useState(0);
+  const [seriesState, setSeriesState] = useState(seriesData);
+  const [wallets, setWallets] = useState(WalletList);
+  const [open, setOpen] = useState(true);
 
   // 번역 제어
   const language = useRecoilValue(languageState);
@@ -46,6 +51,7 @@ function Main() {
   }
   let initDistanceTime = `${date}Days ${hour}:${minutes}:${second}`;
   // setDistanceTime(`뿌우`);
+
 
   const counter = () => {
     setInterval(function () {
@@ -69,10 +75,35 @@ function Main() {
     }, 1000);
   };
 
+  const remainTiktok = () => {
+    setInterval(function () {
+      // seriesValue.forEach((k, v) => {
+      //   console.log(v)
+      // })
+      getRemain()
+        .then((res) => {
+          if (res.status === 200) {
+            let seriesValue = seriesState;
+            let returnValue = res.data.response;
+            for (let key in seriesValue) {
+              seriesValue[key].remain = returnValue[key]
+            }
+            setSeriesState(seriesValue);
+            if (returnValue[5] === 0 && returnValue[6] === 0 && returnValue[7] === 0 && returnValue[8] === 0 && returnValue[9] === 0) {
+              setOpen(false)
+            }
+          }
+
+
+        });
+
+    }, 10000);
+  };
+
   // 데이터 제어
   const [collectionList, setCollectionList] = useState(null);
   const closed = dday.getMonth() !== now.getUTCMonth() || dday.getDate() < now.getUTCDate() ? true : false;
-  // const [soldOut, setSoldOut] =  useState(false);
+
 
   // 팝업1 제어 - 상세 정보 모달.
   const [popup1Open, setPopup1Open] = useState(false);
@@ -86,14 +117,31 @@ function Main() {
   const [popup3Open, setPopup3Open] = useState(false);
   const [popup3Data, setPopup3Data] = useState({});
 
+
+
   counter();
+
   // 코인 리스트 조회
   useEffect(() => {
-    (async () => {
-      // counter();
-      // const { data } = await ntfList();
-      // if (data && data.return_code === 200) setCollectionList(data.response);
-    })();
+    getRemain()
+      .then((res) => {
+        if (res.status === 200) {
+          let seriesValue = seriesState;
+          let returnValue = res.data.response;
+          for (let key in seriesValue) {
+            seriesValue[key].remain = returnValue[key]
+          }
+          setSeriesState(seriesValue);
+          if (returnValue[5] === 0 && returnValue[6] === 0 && returnValue[7] === 0 && returnValue[8] === 0 && returnValue[9] === 0) {
+            // console.log("으이!");
+            setOpen(false)
+          }
+        }
+
+
+      });
+    setOpen((dday.getMonth() === now.getUTCMonth() && dday.getDate() === now.getUTCDate()))
+    remainTiktok();
 
   }, []);
 
@@ -110,10 +158,13 @@ function Main() {
   };
 
   // QR 모달 오픈
-  const openQrModal = (data) => {
+  const openQrModal = () => {
     setPopup3Open(false);
     setPopup2Open(true);
-    setPopup2Data(data);
+    const randomIndex = Math.floor(Math.random() * 4)
+    setPopup2Data({
+      address: WalletList[randomIndex]
+    });
   };
 
   return (
@@ -139,9 +190,16 @@ function Main() {
               </div>
             </div>
             <div className="character"></div>
-            {/* <button className="btnBuy" onClick={() => setPopup3Open(true)}>
-              BUY NOW!
-            </button> */}
+            {
+              open && <button className="btnBuy" onClick={() => {
+                // getRemain();
+
+                setPopup3Open(true)
+              }}>
+                BUY NOW!
+              </button>
+            }
+
           </div>
           <div className="mainBottom"></div>
         </div>
@@ -153,13 +211,13 @@ function Main() {
           <div className="contentsBox">
             <div className="collection" onClick={() => {
               setPopup1Data(
-                series2Data["GUMI (Common)"]
+                seriesState[9]
               )
               setPopup1Open(true)
             }
             }>
               <div className="collectionImg">
-                <div className="soldOut"></div>
+                {seriesState[6].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/gumi2(N).png"} alt="copy url" />
                 </div>
@@ -168,13 +226,13 @@ function Main() {
             </div>
             <div className="collection" onClick={() => {
               setPopup1Data(
-                series2Data["GUMI (Rare)"]
+                seriesState[6]
               )
               setPopup1Open(true)
             }
             }>
               <div className="collectionImg">
-                <div className="soldOut"></div>
+                {seriesState[5].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/gumi2(R).png"} alt="copy url" />
                 </div>
@@ -183,13 +241,13 @@ function Main() {
             </div>
             <div className="collection" onClick={() => {
               setPopup1Data(
-                series2Data["DOBI (Common)"]
+                seriesState[5]
               )
               setPopup1Open(true)
             }
             }>
               <div className="collectionImg">
-                <div className="soldOut"></div>
+                {seriesState[8].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/dobi2(N).png"} alt="copy url" />
                 </div>
@@ -198,13 +256,13 @@ function Main() {
             </div>
             <div className="collection" onClick={() => {
               setPopup1Data(
-                series2Data["DOBI (Rare)"]
+                seriesState[8]
               )
               setPopup1Open(true)
             }
             }>
               <div className="collectionImg">
-                <div className="soldOut"></div>
+                {seriesState[7].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/dobi2(R).png"} alt="copy url" />
                 </div>
@@ -213,13 +271,13 @@ function Main() {
             </div>
             <div className="collection" onClick={() => {
               setPopup1Data(
-                series2Data["KIMCHASA (Unique)"]
+                seriesState[7]
               )
               setPopup1Open(true)
             }
             }>
               <div className="collectionImg">
-                <div className="soldOut"></div>
+                {seriesState[6].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/kimchasa(U).png"} alt="copy url" />
                 </div>
@@ -232,7 +290,7 @@ function Main() {
           <div className="contentsBox">
             <div className="collection" onClick={() => {
               setPopup1Data(
-                series1Data["GUMI (Common)"]
+                seriesState[1]
               )
               setPopup1Open(true)
             }
@@ -247,7 +305,7 @@ function Main() {
             </div>
             <div className="collection" onClick={() => {
               setPopup1Data(
-                series1Data["GUMI (Rare)"]
+                seriesState[2]
               )
               setPopup1Open(true)
             }
@@ -262,7 +320,7 @@ function Main() {
             </div>
             <div className="collection" onClick={() => {
               setPopup1Data(
-                series1Data["DOBI (Common)"]
+                seriesState[3]
               )
               setPopup1Open(true)
             }
@@ -277,7 +335,7 @@ function Main() {
             </div>
             <div className="collection" onClick={() => {
               setPopup1Data(
-                series1Data["DOBI (Rare)"]
+                seriesState[4]
               )
               setPopup1Open(true)
             }
