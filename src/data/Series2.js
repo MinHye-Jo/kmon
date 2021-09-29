@@ -42,7 +42,7 @@ const series2Data = {
         imgUrl: "img/kimchasa(U).png",
         age: "18(1004)Years",
         description: "KIMCHASA is an angel who manages death. He has absolute power over death. This angel peacefully leads the soul of the dead to the afterlife. KIMCHASA hates confusion that destroys peace like war.So he's monitoring the DOBI. If DOBI becomes a monster in Cardano, KIMCHASA wants to kill his soul.",
-        remain: 200
+        remain: 70
     },
 }
 
