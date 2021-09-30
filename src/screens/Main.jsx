@@ -124,7 +124,7 @@ function Main() {
             <div className="mainTitle" style={{ display: !closed ? "block" : "none" }}>
               COMING SOON
               <br />
-              <span className="countDate">{monthName[dday.getUTCMonth()]} {dday.getUTCDate()}rd {dday.getUTCHours() + (dday.getUTCHours() > 12 ? "PM" : "AM")} (UTC)</span>
+              <span className="countDate">{monthName[dday.getUTCMonth()]} {dday.getUTCDate()}rd {dday.getUTCHours() + ":" + (dday.getUTCMinutes() < 10 ? "0" + dday.getUTCMinutes() : dday.getUTCMinutes())} (UTC)</span>
             </div>
             <div className="mainTitle2" style={{ display: closed ? "block" : "none" }}>
               <b>Series2</b>
@@ -134,7 +134,7 @@ function Main() {
                 <br />
               </span>
               <div>
-                <span className="countDate">{monthName[dday.getUTCMonth()]} {dday.getUTCDate()}rd {dday.getUTCHours() + (dday.getUTCHours() > 12 ? "PM" : "AM")} (UTC)</span>
+                <span className="countDate">{monthName[dday.getUTCMonth()]} {dday.getUTCDate()}rd {dday.getUTCHours() + ":" + (dday.getUTCMinutes() < 10 ? "0" + dday.getUTCMinutes() : dday.getUTCMinutes())} (UTC)</span>
                 <p className="countDown">{distanceTime === undefined ? initDistanceTime : distanceTime}</p>
               </div>
             </div>
