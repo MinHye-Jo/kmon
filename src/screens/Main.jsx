@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/css/main.scss";
 
-import { ntfList, ntfData, getRemain } from "../services/collection";
+import { ntfList, ntfData, getRemain, checkClosed } from "../services/collection";
 import DetailModal from "../screens/components/DetailModal";
 import QrModal from "../screens/components/QrModal";
 import QuantityModal from "../screens/components/QuantityModal";
@@ -22,7 +22,7 @@ const monthName = ["January", "February", "March", "April", "May", "June",
 function Main() {
   // 카운트 제어
   const dday = new Date(Date.UTC(2021, 9, 3, 13, 0, 0));
-  // const dday = new Date(Date.UTC(2021, 8, 30, 13, 11, 0));
+  // const dday = new Date(Date.UTC(2021, 8, 10, 14, 10, 0));
   const now = new Date(); //현재 날짜 가져오기
 
 
@@ -31,7 +31,8 @@ function Main() {
   const [seriesState, setSeriesState] = useState(seriesData);
   const [wallets, setWallets] = useState(WalletList);
   const [open, setOpen] = useState(true);
-
+  const [closed, setClosed] = useState(false);
+  // const closed = dday.getMonth() !== now.getUTCMonth() || dday.getDate() < now.getUTCDate() ? true : false;
   // 번역 제어
   const language = useRecoilValue(languageState);
 
@@ -72,7 +73,11 @@ function Main() {
         second = "0" + second;
       }
       setDistanceTime(`${date}Days ${hour}:${minutes}:${second}`);
-      setOpen((dday.getMonth() === now.getUTCMonth() && dday.getDate() === now.getUTCDate() && dday.getUTCHours() >= now.getUTCHours() && dday.getUTCMinutes() >= now.getUTCMinutes()))
+      setOpen((dday.getTime() < now.getTime()))
+      if ((dday.getTime() < now.getTime()) && !(seriesState[5].remain === 0 && seriesState[6].remain === 0 && seriesState[7].remain === 0 && seriesState[8].remain === 0 && seriesState[9].remain === 0)) {
+        setOpen((dday.getTime() < now.getTime()))
+      }
+
     }, 1000);
   };
 
@@ -102,9 +107,38 @@ function Main() {
     }, 10000);
   };
 
+  const closeTiktok = () => {
+    setInterval(function () {
+      // seriesValue.forEach((k, v) => {
+      //   console.log(v)
+      // })
+      checkClosed()
+        .then((res) => {
+          if (res.status === 200) {
+            let seriesValue = seriesState;
+            let returnValue = res.data.response;
+            for (let key in seriesValue) {
+              seriesValue[key].closed = (returnValue[seriesValue[key].collectionId] === "1")
+              // seriesValue[key].closed = (returnValue[key] === "1")
+            }
+            if (returnValue[6] === "1") {
+              setClosed(true)
+            } else {
+              setClosed(false)
+            }
+            setSeriesState(seriesValue);
+
+          }
+
+
+        });
+
+    }, 10000);
+  };
+
   // 데이터 제어
   const [collectionList, setCollectionList] = useState(null);
-  const closed = dday.getMonth() !== now.getUTCMonth() || dday.getDate() < now.getUTCDate() ? true : false;
+
 
 
   // 팝업1 제어 - 상세 정보 모달.
@@ -125,7 +159,27 @@ function Main() {
   // 
   // 코인 리스트 조회
   useEffect(() => {
-    setOpen((dday.getMonth() === now.getUTCMonth() && dday.getDate() === now.getUTCDate() && dday.getUTCHours() >= now.getUTCHours() && dday.getUTCMinutes() >= now.getUTCMinutes()))
+    // setOpen((dday.getMonth() === now.getUTCMonth() && dday.getDate() === now.getUTCDate() && dday.getUTCHours() >= now.getUTCHours() && dday.getUTCMinutes() >= now.getUTCMinutes()))
+    setOpen((dday.getTime() < now.getTime()))
+    checkClosed()
+      .then((res) => {
+        if (res.status === 200) {
+          let seriesValue = seriesState;
+          let returnValue = res.data.response;
+          for (let key in seriesValue) {
+            seriesValue[key].closed = (returnValue[seriesValue[key].collectionId] === "1")
+            if (returnValue[6] === "1") {
+              setClosed(true)
+            } else {
+              setClosed(false)
+            }
+          }
+          setSeriesState(seriesValue);
+
+        }
+
+
+      });
     counter();
     getRemain()
       .then((res) => {
@@ -144,21 +198,14 @@ function Main() {
 
 
       });
+
     remainTiktok();
+    closeTiktok();
 
   }, []);
 
 
 
-  // 코인 세부 정보 조회
-  const collectClick = async (nftId) => {
-    const { data } = await ntfData(nftId);
-    if (data && data.return_code === 200) {
-      const detilData = { ...data.response, closed: closed };
-      setPopup1Data(detilData);
-      setPopup1Open(true);
-    }
-  };
 
   // QR 모달 오픈
   const openQrModal = () => {
@@ -175,28 +222,56 @@ function Main() {
       <div className="contentsWrap">
         <div className="mainImg">
           <div className="characterWrap">
-            <div className="mainTitle" style={{ display: !closed ? "block" : "none" }}>
+            {/* <div className="mainTitle" style={{ display: !closed ? "block" : "none" }}>
               COMING SOON
               <br />
               <span className="countDate">{monthName[dday.getUTCMonth()]} {dday.getUTCDate()}rd {dday.getUTCHours() + ":" + (dday.getUTCMinutes() < 10 ? "0" + dday.getUTCMinutes() : dday.getUTCMinutes())} (UTC)</span>
-            </div>
-            <div className="mainTitle2" style={{ display: closed ? "block" : "none" }}>
-              <b>Series2</b>
-              <br />
-              <span className="mainSubtitle">
-                Teenage and Special NFT
+            </div> */}
+            { // closed
+              closed && <div className="mainTitle2" style={{ display: "block" }}>
+                <b>Series2 closed.</b>
                 <br />
-              </span>
-              <div>
-                <span className="countDate">{monthName[dday.getUTCMonth()]} {dday.getUTCDate()}rd {dday.getUTCHours() + ":" + (dday.getUTCMinutes() < 10 ? "0" + dday.getUTCMinutes() : dday.getUTCMinutes())} (UTC)</span>
-                <p className="countDown">{distanceTime === undefined ? initDistanceTime : distanceTime}</p>
+                <span className="mainSubtitle">
+                  kmonsterz will return with series 3.
+                  <br />
+                  Thank you for your support.
+                </span>
               </div>
-            </div>
+            }
+
+            { // sold out
+              (seriesState[5].remain === 0 && seriesState[6].remain === 0 && seriesState[7].remain === 0 && seriesState[8].remain === 0 && seriesState[9].remain === 0)
+              && !closed && <div className="mainTitle2" style={{ display: "block" }}>
+                <b>Sold out</b>
+                <br />
+                <span className="mainSubtitle">
+                  Thank you so much.
+                </span>
+              </div>
+            }
+
+            {
+              !(seriesState[5].remain === 0 && seriesState[6].remain === 0 && seriesState[7].remain === 0 && seriesState[8].remain === 0 && seriesState[9].remain === 0)
+              && !closed &&
+              <div className="mainTitle2" style={{ display: "block" }}>
+                <b>Series2</b>
+                <br />
+                <span className="mainSubtitle">
+                  Teenage and Special NFT
+                  <br />
+                </span>
+                <div>
+                  <span className="countDate">{monthName[dday.getUTCMonth()]} {dday.getUTCDate()}rd {dday.getUTCHours() + ":" + (dday.getUTCMinutes() < 10 ? "0" + dday.getUTCMinutes() : dday.getUTCMinutes())} (UTC)</span>
+                  {
+                    !open && <p className="countDown">{distanceTime === undefined ? initDistanceTime : distanceTime}</p>
+                  }
+
+                </div>
+              </div>
+            }
             <div className="character"></div>
             {
               open && <button className="btnBuy" onClick={() => {
-                // getRemain();
-
                 setPopup3Open(true)
               }}>
                 BUY NOW!
@@ -213,14 +288,13 @@ function Main() {
           <div className="contentsTitle">Series 2</div>
           <div className="contentsBox">
             <div className="collection" onClick={() => {
-              setPopup1Data(
-                seriesState[7]
-              )
+              setPopup1Data(7)
               setPopup1Open(true)
             }
             }>
               <div className="collectionImg">
-                {seriesState[7].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
+                {seriesState[7].closed && <div className="closed" style={{ display: "block" }}></div>}
+                {(seriesState[7].closed === false && seriesState[7].remain === 0) && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/gumi2(N).png"} alt="copy url" />
                 </div>
@@ -228,14 +302,13 @@ function Main() {
               <div className="collectionText">GUMI (Common)</div>
             </div>
             <div className="collection" onClick={() => {
-              setPopup1Data(
-                seriesState[8]
-              )
+              setPopup1Data(8)
               setPopup1Open(true)
             }
             }>
               <div className="collectionImg">
-                {seriesState[8].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
+                {seriesState[8].closed && <div className="closed" style={{ display: "block" }}></div>}
+                {(seriesState[8].closed === false && seriesState[8].remain === 0) && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/gumi2(R).png"} alt="copy url" />
                 </div>
@@ -243,14 +316,13 @@ function Main() {
               <div className="collectionText">GUMI (Rare)</div>
             </div>
             <div className="collection" onClick={() => {
-              setPopup1Data(
-                seriesState[5]
-              )
+              setPopup1Data(5)
               setPopup1Open(true)
             }
             }>
               <div className="collectionImg">
-                {seriesState[5].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
+                {seriesState[5].closed && <div className="closed" style={{ display: "block" }}></div>}
+                {(seriesState[5].closed === false && seriesState[5].remain === 0) && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/dobi2(N).png"} alt="copy url" />
                 </div>
@@ -258,14 +330,13 @@ function Main() {
               <div className="collectionText">DOBI (Common)</div>
             </div>
             <div className="collection" onClick={() => {
-              setPopup1Data(
-                seriesState[6]
-              )
+              setPopup1Data(6)
               setPopup1Open(true)
             }
             }>
               <div className="collectionImg">
-                {seriesState[6].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
+                {seriesState[6].closed && <div className="closed" style={{ display: "block" }}></div>}
+                {(seriesState[6].closed === false && seriesState[6].remain === 0) && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/dobi2(R).png"} alt="copy url" />
                 </div>
@@ -273,14 +344,13 @@ function Main() {
               <div className="collectionText">DOBI (Rare)</div>
             </div>
             <div className="collection" onClick={() => {
-              setPopup1Data(
-                seriesState[9]
-              )
+              setPopup1Data(9)
               setPopup1Open(true)
             }
             }>
               <div className="collectionImg">
-                {seriesState[9].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
+                {seriesState[9].closed && <div className="closed" style={{ display: "block" }}></div>}
+                {(seriesState[9].closed === false && seriesState[9].remain === 0) && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/kimchasa(U).png"} alt="copy url" />
                 </div>
@@ -369,6 +439,7 @@ function Main() {
             onAction={() => openQrModal()}
           />
           <DetailModal
+            totalData={seriesState}
             data={popup1Data}
             open={popup1Open}
             onClose={() => setPopup1Open(false)}

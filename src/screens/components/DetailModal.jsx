@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { getRemainEach } from "../../services/collection";
+import useInterval from "../../services/hook";
 import "../../styles/css/main.scss";
 
-function DetailModal({ data, open, onClose, onAction }) {
+function DetailModal({ totalData, data, open, onClose, onAction }) {
   const [collectionData, setCollectionData] = useState({
     nftNameKor: "",
     imgUrl: "",
@@ -11,52 +13,45 @@ function DetailModal({ data, open, onClose, onAction }) {
     targetQuantity: 0,
     mintCount: 0,
     closed: false,
+    remain: 0,
   });
   const [soldOut, setSoldOut] = useState(false);
-  const [remain, setRemain] = useState(0);
+  // const [remain, setRemain] = useState(0);
   const [intervalStop, setIntervalStop] = useState(false)
 
 
 
-  let getRemain = null;
 
   useEffect(() => {
 
-    // if (open) {
-    //   // 바로 api 실행. 
-
-
-    //   getRemain = setInterval(function () {
-    //     if (open) {
-    //       setRemain(333)
-    //     }
-    //   }, 10000);
-    // }
-
     if (data) {
-      setCollectionData({ ...data });
-      setRemain(data.remain);
-      // soldOut 제어
-      if (data.closed !== null && !data.closed) {
-        if (data.targetQuantity - data.mintCount <= 0) {
-          setSoldOut(true);
-        } else setSoldOut(false);
-      }
-
-      return () => clearInterval(getRemain);
-      // 10초에 한번씩 remain 수치 불러오기.
-      // remainTiktok();
-      // setRemain(9999)
-      /* clearInterval(intervalVal);
-        intervalVal = setInterval(checkSoldOut, 10000);
-        return false; */
+      setCollectionData({
+        ...totalData[data]
+      });
     }
   }, [data]);
+
+
+  useInterval(() => {
+    // Your custom logic here
+    if (open) {
+      getRemainEach(data)
+        .then((res) => {
+          console.log(res);
+          let returnValue = res.data.response;
+          collectionData.remain = returnValue;
+        })
+    }
+
+  }, 10000);
+
+
 
   return (
     <div className="popupWrap" style={{ display: open ? "block" : "none" }}>
       <div className="popup1" style={{ display: open ? "block" : "none" }}>
         <button className="popupClose" onClick={() => {
+          setIntervalStop(true);
           onClose()
         }}></button>
         <div className="popupLeft">
@@ -95,13 +90,14 @@ function DetailModal({ data, open, onClose, onAction }) {
             </div>
             <div className="row">
               <div className="popupSubtitle">Remain</div>
-              <span className="blue">{remain}</span>
+              <span className="blue">{collectionData.remain}</span>
             </div>
           </div>
         </div>
       </div>
 
       <div className="popupBg" onClick={() => {
+        setIntervalStop(true);
         onClose()
       }}></div>
     </div>

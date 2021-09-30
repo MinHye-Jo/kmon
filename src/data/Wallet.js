@@ -1,8 +1,8 @@
 const WalletList = [
-    'addr1vx0hhmsvgkcx7cr4xfferq54m8pg99wvxxwe0sp8yp7c3rcfvs89t',
-    'addr1vxry3fytlxj56wqaudt5cvsrthy43feuk75f5e8jju2pteszc70r9',
-    'addr1vxjee5wsa7c0ugare3zqdjgalltffxekq7mre2mwme328lcmajcxu',
-    'addr1vxtjq94dwv3uqkl4d3kgcvfwhqan93se30npqt5z5rsxgmgpxwfys'
+    'addr1v9fj9p458rr6mwyfvqtllz3a2nunfzwgs23k3zeq588hg9g530kjv',
+    'addr1v8spr2puvyhan8ngfup8qglzkhn2jstn4sg7zgt39hkdawsn8jnnd',
+    'addr1v98fktmvne808374q0lajtwau246d4lx9qgdxxph8u5cfys970m35',
+    'addr1vyrsgpl7xkxnfau6zq0ds0v3s3gr2vqatm8un9w9ecl7zngslpv26'
 ]
 
 export default WalletList;

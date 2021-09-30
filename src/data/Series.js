@@ -2,6 +2,7 @@ const seriesData = {
     // "GUMI (Common)" season1
     1: {
         id: 1,
+        collectionId: 2,
         closed: true,
         name: "GUMI (Common)",
         imgUrl: "img/gumi(N).png",
@@ -13,6 +14,7 @@ const seriesData = {
     // "GUMI (Rare) season1"
     2: {
         id: 2,
+        collectionId: 3,
         closed: true,
         name: "GUMI (Rare)",
         imgUrl: "img/gumi(R).png",
@@ -23,6 +25,7 @@ const seriesData = {
     // "DOBI (Common)" season1 
     3: {
         id: 3,
+        collectionId: 4,
         closed: true,
         name: "DOBI (Common)",
         imgUrl: "img/dobi(N).png",
@@ -33,6 +36,7 @@ const seriesData = {
     //"DOBI (Rare)" season1
     4: {
         id: 4,
+        collectionId: 5,
         closed: true,
         name: "DOBI (Rare)",
         imgUrl: "img/dobi(R).png",
@@ -44,6 +48,7 @@ const seriesData = {
     //"GUMI (Common) season2"
     7: {
         id: 7,
+        collectionId: 6,
         closed: false,
         name: "GUMI (Common)",
         imgUrl: "img/gumi2(N).png",
@@ -54,6 +59,7 @@ const seriesData = {
     // "GUMI (Rare) season2"
     8: {
         id: 8,
+        collectionId: 6,
         closed: false,
         name: "GUMI (Rare)",
         imgUrl: "img/gumi2(R).png",
@@ -64,6 +70,7 @@ const seriesData = {
     // "DOBI (Common) season2"
     5: {
         id: 5,
+        collectionId: 6,
         closed: false,
         name: "DOBI (Common)",
         imgUrl: "img/dobi2(N).png",
@@ -74,6 +81,7 @@ const seriesData = {
     // "DOBI (Rare)" season2
     6: {
         id: 6,
+        collectionId: 6,
         closed: false,
         name: "DOBI (Rare)",
         imgUrl: "img/dobi2(R).png",
@@ -84,6 +92,7 @@ const seriesData = {
     // "KIMCHASA (Unique)" season2
     9: {
         id: 9,
+        collectionId: 6,
         closed: false,
         name: "KIMCHASA (Unique)",
         imgUrl: "img/kimchasa(U).png",

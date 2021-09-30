@@ -1,8 +1,8 @@
 import http from "../config/http";
 import axios, { AxiosResponse, AxiosError, AxiosPromise } from 'axios';
 
-// const apiUrl = "http://localhost:8090" // TODO: dev
-const apiUrl = "https://api.kmonsterz.io" // TODO: dev
+const apiUrl = "http://localhost:8090" // TODO: dev
+// const apiUrl = "https://api.kmonsterz.io" // TODO: dev
 
 // 목록 조회
 export const ntfList = () => {
@@ -29,5 +29,30 @@ export const getRemain = () => {
   });
 
   const getRemainUrl = apiUrl + '/collection/remain/all';
+  return apiInstance.post(getRemainUrl, {});
+}
+
+export const getRemainEach = (nftId) => {
+
+  const apiInstance = axios.create({
+    baseURL: apiUrl,
+    timeout: 5000,
+    headers: {},
+  });
+
+  const getRemainUrl = apiUrl + `/collection/remain/each/${nftId}`;
+  return apiInstance.post(getRemainUrl, {});
+}
+
+// nft 재고 얼마나 남았는지...
+export const checkClosed = () => {
+
+  const apiInstance = axios.create({
+    baseURL: apiUrl,
+    timeout: 5000,
+    headers: {},
+  });
+
+  const getRemainUrl = apiUrl + '/collection/closed';
   return apiInstance.post(getRemainUrl, {});
 }
