@@ -42,8 +42,8 @@ const seriesData = {
     },
 
     //"GUMI (Common) season2"
-    9: {
-        id: 9,
+    7: {
+        id: 7,
         closed: false,
         name: "GUMI (Common)",
         imgUrl: "img/gumi2(N).png",
@@ -52,8 +52,8 @@ const seriesData = {
         remain: 400
     },
     // "GUMI (Rare) season2"
-    6: {
-        id: 6,
+    8: {
+        id: 8,
         closed: false,
         name: "GUMI (Rare)",
         imgUrl: "img/gumi2(R).png",
@@ -72,8 +72,8 @@ const seriesData = {
         remain: 400,
     },
     // "DOBI (Rare)" season2
-    8: {
-        id: 8,
+    6: {
+        id: 6,
         closed: false,
         name: "DOBI (Rare)",
         imgUrl: "img/dobi2(R).png",
@@ -82,14 +82,14 @@ const seriesData = {
         remain: 200,
     },
     // "KIMCHASA (Unique)" season2
-    7: {
-        id: 7,
+    9: {
+        id: 9,
         closed: false,
         name: "KIMCHASA (Unique)",
         imgUrl: "img/kimchasa(U).png",
         age: "18(1004)Years",
         description: "KIMCHASA is an angel who manages death. He has absolute power over death. This angel peacefully leads the soul of the dead to the afterlife. KIMCHASA hates confusion that destroys peace like war.So he's monitoring the DOBI. If DOBI becomes a monster in Cardano, KIMCHASA wants to kill his soul.",
-        remain: 70
+        remain: 50
     },
 }
 

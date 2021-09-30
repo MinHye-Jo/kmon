@@ -214,13 +214,13 @@ function Main() {
           <div className="contentsBox">
             <div className="collection" onClick={() => {
               setPopup1Data(
-                seriesState[9]
+                seriesState[7]
               )
               setPopup1Open(true)
             }
             }>
               <div className="collectionImg">
-                {seriesState[6].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
+                {seriesState[7].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/gumi2(N).png"} alt="copy url" />
                 </div>
@@ -229,13 +229,13 @@ function Main() {
             </div>
             <div className="collection" onClick={() => {
               setPopup1Data(
-                seriesState[6]
+                seriesState[8]
               )
               setPopup1Open(true)
             }
             }>
               <div className="collectionImg">
-                {seriesState[5].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
+                {seriesState[8].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/gumi2(R).png"} alt="copy url" />
                 </div>
@@ -250,7 +250,7 @@ function Main() {
             }
             }>
               <div className="collectionImg">
-                {seriesState[8].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
+                {seriesState[5].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/dobi2(N).png"} alt="copy url" />
                 </div>
@@ -259,13 +259,13 @@ function Main() {
             </div>
             <div className="collection" onClick={() => {
               setPopup1Data(
-                seriesState[8]
+                seriesState[6]
               )
               setPopup1Open(true)
             }
             }>
               <div className="collectionImg">
-                {seriesState[7].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
+                {seriesState[6].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/dobi2(R).png"} alt="copy url" />
                 </div>
@@ -274,13 +274,13 @@ function Main() {
             </div>
             <div className="collection" onClick={() => {
               setPopup1Data(
-                seriesState[7]
+                seriesState[9]
               )
               setPopup1Open(true)
             }
             }>
               <div className="collectionImg">
-                {seriesState[6].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
+                {seriesState[9].remain === 0 && <div className="soldOut" style={{ display: "block" }}></div>}
                 <div className="imgArea">
                   <img src={"img/kimchasa(U).png"} alt="copy url" />
                 </div>
