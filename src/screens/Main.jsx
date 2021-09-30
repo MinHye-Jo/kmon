@@ -22,6 +22,7 @@ const monthName = ["January", "February", "March", "April", "May", "June",
 function Main() {
   // 카운트 제어
   const dday = new Date(Date.UTC(2021, 9, 3, 13, 0, 0));
+  // const dday = new Date(Date.UTC(2021, 8, 30, 13, 11, 0));
   const now = new Date(); //현재 날짜 가져오기
 
 
@@ -71,7 +72,7 @@ function Main() {
         second = "0" + second;
       }
       setDistanceTime(`${date}Days ${hour}:${minutes}:${second}`);
-
+      setOpen((dday.getMonth() === now.getUTCMonth() && dday.getDate() === now.getUTCDate() && dday.getUTCHours() >= now.getUTCHours() && dday.getUTCMinutes() >= now.getUTCMinutes()))
     }, 1000);
   };
 
@@ -120,10 +121,12 @@ function Main() {
 
 
 
-  counter();
-
+  // counter();
+  // 
   // 코인 리스트 조회
   useEffect(() => {
+    setOpen((dday.getMonth() === now.getUTCMonth() && dday.getDate() === now.getUTCDate() && dday.getUTCHours() >= now.getUTCHours() && dday.getUTCMinutes() >= now.getUTCMinutes()))
+    counter();
     getRemain()
       .then((res) => {
         if (res.status === 200) {
@@ -141,7 +144,6 @@ function Main() {
 
 
       });
-    setOpen((dday.getMonth() === now.getUTCMonth() && dday.getDate() === now.getUTCDate()))
     remainTiktok();
 
   }, []);
