@@ -21,8 +21,8 @@ const monthName = ["January", "February", "March", "April", "May", "June",
 
 function Main() {
   // 카운트 제어
-  // const dday = new Date(Date.UTC(2021, 9, 3, 13, 0, 0));
-  const dday = new Date(Date.UTC(2021, 9, 1, 1, 0, 0));
+  const dday = new Date(Date.UTC(2021, 9, 3, 13, 0, 0));
+  // const dday = new Date(Date.UTC(2021, 9, 1, 1, 0, 0));
   const now = new Date(); //현재 날짜 가져오기 얘도 UTC임
 
 
