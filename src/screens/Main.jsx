@@ -21,9 +21,9 @@ const monthName = ["January", "February", "March", "April", "May", "June",
 
 function Main() {
   // 카운트 제어
-  const dday = new Date(Date.UTC(2021, 9, 3, 13, 0, 0));
-  // const dday = new Date(Date.UTC(2021, 8, 10, 14, 10, 0));
-  const now = new Date(); //현재 날짜 가져오기
+  // const dday = new Date(Date.UTC(2021, 9, 3, 13, 0, 0));
+  const dday = new Date(Date.UTC(2021, 9, 1, 1, 0, 0));
+  const now = new Date(); //현재 날짜 가져오기 얘도 UTC임
 
 
   const [distanceTime, setDistanceTime] = useState();
@@ -271,7 +271,7 @@ function Main() {
             }
             <div className="character"></div>
             {
-              open && <button className="btnBuy" onClick={() => {
+              (open && !(seriesState[5].remain === 0 && seriesState[6].remain === 0 && seriesState[7].remain === 0 && seriesState[8].remain === 0 && seriesState[9].remain === 0)) && <button className="btnBuy" onClick={() => {
                 setPopup3Open(true)
               }}>
                 BUY NOW!
