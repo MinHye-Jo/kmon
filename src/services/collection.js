@@ -1,8 +1,8 @@
 import http from "../config/http";
 import axios, { AxiosResponse, AxiosError, AxiosPromise } from 'axios';
 
-const apiUrl = "http://localhost:8090" // TODO: dev
-// const apiUrl = "https://api.kmonsterz.io" // TODO: dev
+// const apiUrl = "http://localhost:8090" // TODO: dev
+const apiUrl = "https://api.kmonsterz.io" // TODO: dev
 
 // 목록 조회
 export const ntfList = () => {
