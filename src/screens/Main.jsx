@@ -362,9 +362,7 @@ function Main() {
           <div className="contentsTitle">Series 1</div>
           <div className="contentsBox">
             <div className="collection" onClick={() => {
-              setPopup1Data(
-                seriesState[1]
-              )
+              setPopup1Data(1)
               setPopup1Open(true)
             }
             }>
@@ -377,9 +375,7 @@ function Main() {
               <div className="collectionText">GUMI (Common)</div>
             </div>
             <div className="collection" onClick={() => {
-              setPopup1Data(
-                seriesState[2]
-              )
+              setPopup1Data(2)
               setPopup1Open(true)
             }
             }>
@@ -392,9 +388,7 @@ function Main() {
               <div className="collectionText">GUMI (Rare)</div>
             </div>
             <div className="collection" onClick={() => {
-              setPopup1Data(
-                seriesState[3]
-              )
+              setPopup1Data(3)
               setPopup1Open(true)
             }
             }>
@@ -407,9 +401,7 @@ function Main() {
               <div className="collectionText">DOBI (Common)</div>
             </div>
             <div className="collection" onClick={() => {
-              setPopup1Data(
-                seriesState[4]
-              )
+              setPopup1Data(4)
               setPopup1Open(true)
             }
             }>
