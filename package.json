@@ -26,7 +26,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "deploy": "npm run build && aws s3 sync ./build s3://dev.kmonsterz.io --acl public-read && aws cloudfront create-invalidation --distribution-id E3SUQ6AWZNW4Y3 --paths \"/index.html\" \"/static/js/*\""
+    "deploy": "npm run build && aws s3 sync ./build s3://dev.kmonsterz.io --acl public-read && aws cloudfront create-invalidation --distribution-id E3SUQ6AWZNW4Y3 --paths \"/index.html\" \"/static/js/*\"",
+    "deploy-dev": "npm run build && aws s3 sync ./build s3://dev.kmonsterz.io --acl public-read && aws cloudfront create-invalidation --distribution-id EMNZHC5YBMO4M --paths \"/index.html\" \"/static/js/*\""
   },
   "eslintConfig": {
     "extends": [

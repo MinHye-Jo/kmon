@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import QRCode from "react-qr-code";
 import "../../styles/css/main.scss";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -9,11 +9,13 @@ function QrModal({ data, quantityData, open, onClose }) {
     nftPrice: "",
   });
 
+  const addressInput = useRef();
+  const adaInput = useRef();
+
 
 
   useEffect(() => {
     if (data) {
-      console.log(data)
       setQrData({ ...data });
     }
   }, [open]);
@@ -35,9 +37,11 @@ function QrModal({ data, quantityData, open, onClose }) {
         <div className="popupText">
           <div className="popupSubtitle">Address</div>
           <div className="popupBoxAddress">
-            <input type="text" className="address" readOnly value={qrData.address} />
-            <CopyToClipboard text={qrData.address}>
-              <button className="btnCopy">
+            <input type="text" className="address" ref={addressInput} readOnly value={qrData.address} />
+            <CopyToClipboard text={qrData.address}
+              onCopy={() => { }}
+            >
+              <button className="btnCopy" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                   <path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"></path>
                 </svg>
@@ -47,8 +51,10 @@ function QrModal({ data, quantityData, open, onClose }) {
           <div className="popupSubtitle">Amount</div>
           <div className="popupBox">
             {/* <input type="text" readOnly value={qrData.nftPrice / 1000000} /> ADA */}
-            <input type="text" readOnly value={quantityData.quantity * 15} /> ADA
-            <CopyToClipboard text={quantityData.quantity * 15}>
+            <input type="text" ref={adaInput} readOnly value={quantityData.quantity * 15} /> ADA
+            <CopyToClipboard text={quantityData.quantity * 15}
+              onCopy={() => { }}
+            >
               <button className="btnCopy">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                   <path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"></path>
