@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import QRCode from "react-qr-code";
 import "../../styles/css/main.scss";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 function QrModal({ data, quantityData, open, onClose }) {
   const [qrData, setQrData] = useState({
@@ -8,8 +9,11 @@ function QrModal({ data, quantityData, open, onClose }) {
     nftPrice: "",
   });
 
+
+
   useEffect(() => {
     if (data) {
+      console.log(data)
       setQrData({ ...data });
     }
   }, [open]);
@@ -32,21 +36,25 @@ function QrModal({ data, quantityData, open, onClose }) {
           <div className="popupSubtitle">Address</div>
           <div className="popupBoxAddress">
             <input type="text" className="address" readOnly value={qrData.address} />
-            <button className="btnCopy" onClick={() => navigator.clipboard.writeText(qrData.address)}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-                <path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"></path>
-              </svg>
-            </button>
+            <CopyToClipboard text={qrData.address}>
+              <button className="btnCopy">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                  <path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"></path>
+                </svg>
+              </button>
+            </CopyToClipboard>
           </div>
           <div className="popupSubtitle">Amount</div>
           <div className="popupBox">
             {/* <input type="text" readOnly value={qrData.nftPrice / 1000000} /> ADA */}
             <input type="text" readOnly value={quantityData.quantity * 15} /> ADA
-            <button className="btnCopy" onClick={() => navigator.clipboard.writeText(qrData.nftPrice / 1000000)}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-                <path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"></path>
-              </svg>
-            </button>
+            <CopyToClipboard text={quantityData.quantity * 15}>
+              <button className="btnCopy">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                  <path d="M22 6v16h-16v-16h16zm2-2h-20v20h20v-20zm-24 17v-21h21v2h-19v19h-2z"></path>
+                </svg>
+              </button>
+            </CopyToClipboard>
           </div>
           <div className="popupSubtitle">Important</div>
           <div className="popupBox red" style={{ textAlign: "left" }}>
